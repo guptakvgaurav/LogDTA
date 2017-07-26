@@ -1,14 +1,12 @@
 # tsms-server
 
-This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.2.2.
-
 ## Getting Started
 
 ### Prerequisites
 
 - [Git](https://git-scm.com/)
 - [Node.js and npm](nodejs.org) Node >= 4.x.x, npm >= 2.x.x
-- [Gulp](http://gulpjs.com/) (`npm install --global gulp`)
+- [x] [Gulp](http://gulpjs.com/) (`npm install --global gulp`)
 - [MongoDB](https://www.mongodb.org/) - Keep a running daemon with `mongod`
 
 ### Developing
@@ -17,13 +15,15 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 
 2. Run `mongod` in a separate shell to keep an instance of the MongoDB Daemon running
 
-3. Run `gulp serve` to start the development server. It should automatically open the client in your browser when ready.
+3. Run `npm install nodemon -g` to install nodemon.
+
+4. Run `npm start` to start the server.
 
 ## Build & development
 
-Run `gulp build` for building and `gulp serve` for preview.
+[x] Run `gulp build` for building and `gulp serve` for preview.
 
 ## Testing
 
-Running `npm test` will run the unit tests with karma.
+[x] Running `npm test` will run the unit tests with karma.
 =======
