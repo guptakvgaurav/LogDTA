@@ -7,10 +7,10 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/tsmsserver-dev'
+    uri: 'mongodb://localhost/tsms-dev'
   },
 
   // Seed database on startup
-  seedDB: true
+  seedDB: false
 
 };
