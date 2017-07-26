@@ -2,14 +2,14 @@
 
 ## Getting Started
 
-### Prerequisites
+## Prerequisites
 
 - [Git](https://git-scm.com/)
-- [Node.js and npm](nodejs.org) Node >= 4.x.x, npm >= 2.x.x
-- [x] [Gulp](http://gulpjs.com/) (`npm install --global gulp`)
+- [Node.js and npm](nodejs.org) Node >= 6.x.x
+- [x][Gulp](http://gulpjs.com/) (`npm install --global gulp`)
 - [MongoDB](https://www.mongodb.org/) - Keep a running daemon with `mongod`
 
-### Developing
+## Developing
 
 1. Run `npm install` to install server dependencies.
 
@@ -27,3 +27,7 @@
 
 [x] Running `npm test` will run the unit tests with karma.
 =======
+
+## Note
+[x] Denotes the item that is not supported at this time, but will be supported in future.
+
