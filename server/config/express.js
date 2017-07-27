@@ -18,7 +18,7 @@ import config from './environment';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
-var MongoStore = connectMongo(session);
+let MongoStore = connectMongo(session);
 
 export default function(app) {
   var env = app.get('env');
@@ -31,13 +31,14 @@ export default function(app) {
     // app.use(favicon(path.join(config.root, 'client', 'favicon.ico')));
   }
 
-  // app.set('appPath', path.join(config.root, 'client'));
+  app.set('clientPath', path.join(config.root, 'client'));
+  app.set('serverPath', path.join(config.root, 'server'));
   // app.use(express.static(app.get('appPath')));
   app.use(morgan('dev'));
 
-  // app.set('views', `${config.root}/server/views`);
-  // app.engine('html', require('ejs').renderFile);
-  // app.set('view engine', 'html');
+  app.set('views', `${config.root}/server/views`);
+  app.engine('html', require('ejs').renderFile);
+  app.set('view engine', 'html');
   app.use(shrinkRay());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
@@ -125,5 +126,5 @@ export default function(app) {
 
   if(env === 'development' || env === 'test') {
     app.use(errorHandler()); // Error handler - has to be last
-  }
+}  
 }
