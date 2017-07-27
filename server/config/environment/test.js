@@ -17,5 +17,14 @@ module.exports = {
         timestamps: false
       }
     }
+  },
+  logging: {
+    console: {
+      level: 'warn'
+    },
+    file: {
+      level: 'warn',
+      filename: 'tsms.test.log'
+    }
   }
 };

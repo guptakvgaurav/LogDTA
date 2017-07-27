@@ -28,6 +28,13 @@
 [x] Running `npm test` will run the unit tests with karma.
 =======
 
+## Logging
+User `logger.[level]('my log statement')` to log the statement.
+ - `level` can be any valid winston level (`silly`, `info`, `debug` etc).
+ - `import logger from <path to componnet->logger-> index file`.
+ 
+
+
 ## Note
 [x] Denotes the item that is not supported at this time, but will be supported in future.
 
