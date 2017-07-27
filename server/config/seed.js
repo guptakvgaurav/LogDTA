@@ -7,16 +7,16 @@
 import Employee from '../api/employee/employee.model';
 import config from './environment/';
 
-const dummyUsers = [];
+const dummyEmployees = [];
 
 export default function seedDatabaseIfNeeded() {
   if(config.seedDB) {
     Employee.find({}).remove()
       .then(() => {
-        let user = Employee.create(dummyUsers);
-        return user;
+        let employee = Employee.create(dummyEmployees);
+        return employee;
       })
-      .then(() => console.log('finished populating users'))
-      .catch(err => console.log('error populating users', err));
+      .then(() => console.log('finished populating employees'))
+      .catch(err => console.log('error populating employees', err));
   }
 }

@@ -42,4 +42,4 @@ const composeMiddlewares = (compose([
   authChecker
 ]));
 
-module.exports=composeMiddlewares
+module.exports=composeMiddlewares;

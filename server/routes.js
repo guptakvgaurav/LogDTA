@@ -8,16 +8,16 @@ import errors from './components/errors';
 import path from 'path';
 const authMiddlewares=require("./components/auth");
 const redirectUrlFunction = require("./components/auth/redirectUrl");
-
+const logout=require("./components/auth/logout");
 export default function (app) {
-  // Insert routes below
-  app.use('/api/users', require('./api/employee'));
-  //route for logout
+
+  //middlewares
   app.use(authMiddlewares);
+  // Insert routes below
+  app.use('/api/employees', require('./api/employee'));
+  //route for logout
   app.route("/logout")
-    .get((req, res) => {
-      res.clearCookie('Tsms').send("logout successfull");
-    });
+    .get(logout);
 
   app.route("/")
     .get((req,res)=>{
@@ -25,9 +25,7 @@ export default function (app) {
     });
   //Route to call redirect url from oAuth when sign in first time
   app.route("/api/oauthServerCallback")
-    .get((req, res) => {
-      redirectUrlFunction(req,res)
-    });
+    .get(redirectUrlFunction);
 
   // app.use('/api/things', require('./api/thing'));
   // All undefined asset or api routes should return a 404

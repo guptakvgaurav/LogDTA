@@ -13,8 +13,6 @@ const redirectUrl = (req, res) => {
     } else if (employeeData.statusCode === 200) {
 
       const employee = JSON.parse(employeeData.body);
-
-      console.log('Employee -->', employee);
       const employeeDetails = {
         employeeEmail: employee.email,
         employeeId: employee.employeeCode,
@@ -31,7 +29,7 @@ const redirectUrl = (req, res) => {
       res.cookie('Tsms', tsmsToken, {
         maxAge: 900000,
       });
-      console.log('Cookie saved, initiating query');
+
       EmployeeSchema.update({
         employeeId: employee.employeeCode,
         employeeEmail: employee.email
@@ -50,5 +48,5 @@ const redirectUrl = (req, res) => {
   })
 };
 
-module.exports=redirectUrl
+module.exports=redirectUrl;
 
