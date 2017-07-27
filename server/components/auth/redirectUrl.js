@@ -36,11 +36,14 @@ const redirectUrl = (req, res) => {
             tsmsToken,
             hrmsToken,
           }
-        }, {upsert: true}, (err, user) => {
-          if (err) {
-            console.log(err);
-          }
-        });
+        }, {upsert: true}).exec()
+          .then(employee=>{
+
+          })
+          .catch(error=>{
+            res.send(error);
+          });
+
         res.sendFile("/home/sourabh/LogDTA/client/client.html")
 
       }
