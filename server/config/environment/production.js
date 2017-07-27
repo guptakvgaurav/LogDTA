@@ -20,5 +20,14 @@ module.exports = {
       || process.env.MONGOHQ_URL
       || process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME
       || 'mongodb://localhost/tsms'
+  },
+  logging: {
+    console: {
+      level: 'warn'
+    },
+    file: {
+      level: 'warn',
+      filename: 'tsms.prod.log'
+    }
   }
 };

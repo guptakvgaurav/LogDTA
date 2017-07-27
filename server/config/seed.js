@@ -6,6 +6,7 @@
 'use strict';
 import Employee from '../api/employee/employee.model';
 import config from './environment/';
+import logger from '../components/logger';
 
 const dummyEmployees = [];
 
@@ -16,7 +17,7 @@ export default function seedDatabaseIfNeeded() {
         let employee = Employee.create(dummyEmployees);
         return employee;
       })
-      .then(() => console.log('finished populating employees'))
-      .catch(err => console.log('error populating employees', err));
+      .then(() => logger.verbose('finished populating users'))
+      .catch(err => logger.warn('error populating users', err));
   }
 }

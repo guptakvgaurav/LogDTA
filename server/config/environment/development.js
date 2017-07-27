@@ -11,6 +11,14 @@ module.exports = {
   },
 
   // Seed database on startup
-  seedDB: false
-
+  seedDB: false,
+  logging: {
+    console: {
+      level: 'silly'
+    },
+    file: {
+      level: 'silly',
+      filename: 'tsms.dev.log'
+    }
+  }
 };

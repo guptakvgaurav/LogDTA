@@ -1,6 +1,7 @@
 node_modules
 public
 .tmp
+.idea
 client/bower_components
 client/index.html
 dist
@@ -8,5 +9,5 @@ dist
 npm-debug.log
 coverage
 .history
-
-.idea/
+*.log
+.vscode
