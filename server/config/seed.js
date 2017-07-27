@@ -4,16 +4,16 @@
  */
 
 'use strict';
-import User from '../api/user/user.model';
+import Employee from '../api/employee/employee.model';
 import config from './environment/';
 
 const dummyUsers = [];
 
 export default function seedDatabaseIfNeeded() {
   if(config.seedDB) {
-    User.find({}).remove()
+    Employee.find({}).remove()
       .then(() => {
-        let user = User.create(dummyUsers);
+        let user = Employee.create(dummyUsers);
         return user;
       })
       .then(() => console.log('finished populating users'))

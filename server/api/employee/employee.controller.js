@@ -11,7 +11,7 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import User from './user.model';
+import User from './employee.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;

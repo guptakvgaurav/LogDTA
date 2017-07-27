@@ -35,8 +35,8 @@ describe('User API:', function() {
       request(app)
         .post('/api/users')
         .send({
-          name: 'New user',
-          info: 'This is the brand new user!!!'
+          name: 'New employee',
+          info: 'This is the brand new employee!!!'
         })
         .expect(201)
         .expect('Content-Type', /json/)
@@ -49,9 +49,9 @@ describe('User API:', function() {
         });
     });
 
-    it('should respond with the newly created user', function() {
-      newuser.name.should.equal('New user');
-      newuser.info.should.equal('This is the brand new user!!!');
+    it('should respond with the newly created employee', function() {
+      newuser.name.should.equal('New employee');
+      newuser.info.should.equal('This is the brand new employee!!!');
     });
   });
 
@@ -76,9 +76,9 @@ describe('User API:', function() {
       user = {};
     });
 
-    it('should respond with the requested user', function() {
-      user.name.should.equal('New user');
-      user.info.should.equal('This is the brand new user!!!');
+    it('should respond with the requested employee', function() {
+      user.name.should.equal('New employee');
+      user.info.should.equal('This is the brand new employee!!!');
     });
   });
 
@@ -89,8 +89,8 @@ describe('User API:', function() {
       request(app)
         .put(`/api/users/${newuser._id}`)
         .send({
-          name: 'Updated user',
-          info: 'This is the updated user!!!'
+          name: 'Updated employee',
+          info: 'This is the updated employee!!!'
         })
         .expect(200)
         .expect('Content-Type', /json/)
@@ -107,12 +107,12 @@ describe('User API:', function() {
       updateduser = {};
     });
 
-    it('should respond with the updated user', function() {
-      updateduser.name.should.equal('Updated user');
-      updateduser.info.should.equal('This is the updated user!!!');
+    it('should respond with the updated employee', function() {
+      updateduser.name.should.equal('Updated employee');
+      updateduser.info.should.equal('This is the updated employee!!!');
     });
 
-    it('should respond with the updated user on a subsequent GET', function(done) {
+    it('should respond with the updated employee on a subsequent GET', function(done) {
       request(app)
         .get(`/api/users/${newuser._id}`)
         .expect(200)
@@ -123,8 +123,8 @@ describe('User API:', function() {
           }
           let user = res.body;
 
-          user.name.should.equal('Updated user');
-          user.info.should.equal('This is the updated user!!!');
+          user.name.should.equal('Updated employee');
+          user.info.should.equal('This is the updated employee!!!');
 
           done();
         });
@@ -138,8 +138,8 @@ describe('User API:', function() {
       request(app)
         .patch(`/api/users/${newuser._id}`)
         .send([
-          { op: 'replace', path: '/name', value: 'Patched user' },
-          { op: 'replace', path: '/info', value: 'This is the patched user!!!' }
+          { op: 'replace', path: '/name', value: 'Patched employee' },
+          { op: 'replace', path: '/info', value: 'This is the patched employee!!!' }
         ])
         .expect(200)
         .expect('Content-Type', /json/)
@@ -156,9 +156,9 @@ describe('User API:', function() {
       patcheduser = {};
     });
 
-    it('should respond with the patched user', function() {
-      patcheduser.name.should.equal('Patched user');
-      patcheduser.info.should.equal('This is the patched user!!!');
+    it('should respond with the patched employee', function() {
+      patcheduser.name.should.equal('Patched employee');
+      patcheduser.info.should.equal('This is the patched employee!!!');
     });
   });
 
@@ -175,7 +175,7 @@ describe('User API:', function() {
         });
     });
 
-    it('should respond with 404 when user does not exist', function(done) {
+    it('should respond with 404 when employee does not exist', function(done) {
       request(app)
         .delete(`/api/users/${newuser._id}`)
         .expect(404)

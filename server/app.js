@@ -6,6 +6,7 @@
 
 import express from 'express';
 import mongoose from 'mongoose';
+const cookieParser=require("cookie-parser");
 mongoose.Promise = require('bluebird');
 import config from './config/environment';
 import http from 'http';
@@ -19,10 +20,13 @@ mongoose.connection.on('error', function(err) {
 });
 
 // Setup server
-var app = express();
-var server = http.createServer(app);
+const app = express();
+const server = http.createServer(app);
 require('./config/express').default(app);
 require('./routes').default(app);
+
+//using cookie-parser
+app.use(cookieParser());
 
 // Start server
 function startServer() {
