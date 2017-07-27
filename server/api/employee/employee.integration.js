@@ -5,35 +5,35 @@
 var app = require('../..');
 import request from 'supertest';
 
-var newuser;
+let newemployee;
 
-describe('User API:', function() {
-  describe('GET /api/users', function() {
-    var users;
+describe('Employee API:', function() {
+  describe('GET /api/employees', function() {
+    let employees;
 
     beforeEach(function(done) {
       request(app)
-        .get('/api/users')
+        .get('/api/employees')
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if(err) {
             return done(err);
           }
-          users = res.body;
+          employees = res.body;
           done();
         });
     });
 
     it('should respond with JSON array', function() {
-      users.should.be.instanceOf(Array);
+      employees.should.be.instanceOf(Array);
     });
   });
 
-  describe('POST /api/users', function() {
+  describe('POST /api/employees', function() {
     beforeEach(function(done) {
       request(app)
-        .post('/api/users')
+        .post('/api/employees')
         .send({
           name: 'New employee',
           info: 'This is the brand new employee!!!'
@@ -44,50 +44,50 @@ describe('User API:', function() {
           if(err) {
             return done(err);
           }
-          newuser = res.body;
+          newemployee = res.body;
           done();
         });
     });
 
     it('should respond with the newly created employee', function() {
-      newuser.name.should.equal('New employee');
-      newuser.info.should.equal('This is the brand new employee!!!');
+      newemployee.name.should.equal('New employee');
+      newemployee.info.should.equal('This is the brand new employee!!!');
     });
   });
 
-  describe('GET /api/users/:id', function() {
-    var user;
+  describe('GET /api/employees/:id', function() {
+    let employee;
 
     beforeEach(function(done) {
       request(app)
-        .get(`/api/users/${newuser._id}`)
+        .get(`/api/employees/${newemployee._id}`)
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if(err) {
             return done(err);
           }
-          user = res.body;
+          employee = res.body;
           done();
         });
     });
 
     afterEach(function() {
-      user = {};
+      employee = {};
     });
 
     it('should respond with the requested employee', function() {
-      user.name.should.equal('New employee');
-      user.info.should.equal('This is the brand new employee!!!');
+      employee.name.should.equal('New employee');
+      employee.info.should.equal('This is the brand new employee!!!');
     });
   });
 
-  describe('PUT /api/users/:id', function() {
-    var updateduser;
+  describe('PUT /api/employees/:id', function() {
+    var updatedemployee;
 
     beforeEach(function(done) {
       request(app)
-        .put(`/api/users/${newuser._id}`)
+        .put(`/api/employees/${newemployee._id}`)
         .send({
           name: 'Updated employee',
           info: 'This is the updated employee!!!'
@@ -98,45 +98,45 @@ describe('User API:', function() {
           if(err) {
             return done(err);
           }
-          updateduser = res.body;
+          updatedemployee = res.body;
           done();
         });
     });
 
     afterEach(function() {
-      updateduser = {};
+      updatedemployee = {};
     });
 
     it('should respond with the updated employee', function() {
-      updateduser.name.should.equal('Updated employee');
-      updateduser.info.should.equal('This is the updated employee!!!');
+      updatedemployee.name.should.equal('Updated employee');
+      updatedemployee.info.should.equal('This is the updated employee!!!');
     });
 
     it('should respond with the updated employee on a subsequent GET', function(done) {
       request(app)
-        .get(`/api/users/${newuser._id}`)
+        .get(`/api/employees/${newemployee._id}`)
         .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if(err) {
             return done(err);
           }
-          let user = res.body;
+          let employee = res.body;
 
-          user.name.should.equal('Updated employee');
-          user.info.should.equal('This is the updated employee!!!');
+           employee.name.should.equal('Updated employee');
+           employee.info.should.equal('This is the updated employee!!!');
 
           done();
         });
     });
   });
 
-  describe('PATCH /api/users/:id', function() {
-    var patcheduser;
+  describe('PATCH /api/employees/:id', function() {
+    let patchedemployee;
 
     beforeEach(function(done) {
       request(app)
-        .patch(`/api/users/${newuser._id}`)
+        .patch(`/api/employees/${newemployee._id}`)
         .send([
           { op: 'replace', path: '/name', value: 'Patched employee' },
           { op: 'replace', path: '/info', value: 'This is the patched employee!!!' }
@@ -147,25 +147,25 @@ describe('User API:', function() {
           if(err) {
             return done(err);
           }
-          patcheduser = res.body;
+          patchedemployee = res.body;
           done();
         });
     });
 
     afterEach(function() {
-      patcheduser = {};
+      patchedemployee = {};
     });
 
     it('should respond with the patched employee', function() {
-      patcheduser.name.should.equal('Patched employee');
-      patcheduser.info.should.equal('This is the patched employee!!!');
+      patchedemployee.name.should.equal('Patched employee');
+      patchedemployee.info.should.equal('This is the patched employee!!!');
     });
   });
 
-  describe('DELETE /api/users/:id', function() {
+  describe('DELETE /api/employees/:id', function() {
     it('should respond with 204 on successful removal', function(done) {
       request(app)
-        .delete(`/api/users/${newuser._id}`)
+        .delete(`/api/employees/${newemployee._id}`)
         .expect(204)
         .end(err => {
           if(err) {
@@ -177,7 +177,7 @@ describe('User API:', function() {
 
     it('should respond with 404 when employee does not exist', function(done) {
       request(app)
-        .delete(`/api/users/${newuser._id}`)
+        .delete(`/api/employees/${newemployee._id}`)
         .expect(404)
         .end(err => {
           if(err) {

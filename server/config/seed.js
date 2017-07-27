@@ -17,7 +17,7 @@ export default function seedDatabaseIfNeeded() {
         let employee = Employee.create(dummyEmployees);
         return employee;
       })
-      .then(() => logger.verbose('finished populating users'))
-      .catch(err => logger.warn('error populating users', err));
+      .then(() => logger.verbose('finished populating employees'))
+      .catch(err => logger.warn('error populating employees', err));
   }
 }
