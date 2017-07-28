@@ -1,13 +1,28 @@
 /**
  * Created by sourabh on 26/7/17.
  */
-const jwt_token = require("jsonwebtoken");
-const compose = require("compose-middleware").compose;
+import jwt_token from "jsonwebtoken";
+import config from "../../config/environment"
+import { compose } from "compose-middleware"
+// import { compose } from "compose-middleware";
+const AUTHORIZE_URL = "http://newers-world-oauth.qa2.tothenew.net/oauth/authorize?client_id=e6d6a83e-6c7a-11e7-9394-406186be844b";
+const AUTH_HRMS_TOKEN_COOKIE = 'nw_dev_oauthToken';
+
+/**
+ * it extracts the token from headers
+ * verifies the token received from client side in order to authenticate and authorize the user,
+ * if authenticated decodes the employeeId from the token and adds it in req object
+ * if token is not verified send an error otherwise calls the next middleware
+ * if not token then also it calls the next middleware
+ * @param req
+ * @param res
+ * @param next
+ */
 const verifyTsmsToken = (req, res, next) => {
   //to verify token
   const token = req.headers.authorization;
   if (token) {
-    jwt_token.verify(token, process.env.SECRET_KEY, (err, decode) => {
+    jwt_token.verify(token, config.token.SecretKey, (err, decode) => {
       if (err) {
         res.status(500).send("invalid token");
       }
@@ -22,18 +37,24 @@ const verifyTsmsToken = (req, res, next) => {
   }
 };
 
+/**
+ *exclude Callback url to check cookie existing condition
+ *if cookie exists call employee detail API with token in cookie
+ *if employee sign in first time call authorize api for google sign in
+
+ * @param req
+ * @param res
+ * @param next
+ */
 const authChecker = (req, res, next) => {
   const url = req.originalUrl;
-  //exclude Callback url to check cookie existing condition
   if (url.indexOf('/api/oauthServerCallback') != -1) {
     return next();
   }
-  //if cookie exists call employee detail API with token in cookie
-  if (req.cookies['nw_dev_oauthToken']) {
+  if (req.cookies[AUTH_HRMS_TOKEN_COOKIE]) {
     next();
-  }//if employee sign in first time call authorize api for google sign in
-  else {
-    res.redirect("http://newers-world-oauth.qa2.tothenew.net/oauth/authorize?client_id=e6d6a83e-6c7a-11e7-9394-406186be844b")
+  } else {
+    res.redirect(AUTHORIZE_URL)
   }
 };
 
@@ -42,4 +63,4 @@ const composeMiddlewares = (compose([
   authChecker
 ]));
 
-module.exports=composeMiddlewares;
+module.exports = composeMiddlewares;

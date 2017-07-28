@@ -6,9 +6,9 @@
 
 import errors from './components/errors';
 import path from 'path';
-const authMiddlewares=require("./components/auth");
-const redirectUrlFunction = require("./components/auth/redirectUrl");
-const logout=require("./components/auth/logout");
+import authMiddlewares from "./components/auth";
+import redirectUrlFunction from "./components/auth/redirectUrl";
+import logout from "./components/auth/logout";
 export default function (app) {
 
   //middlewares
