@@ -11,3 +11,4 @@ coverage
 .history
 *.log
 .vscode
+app_settings.js
