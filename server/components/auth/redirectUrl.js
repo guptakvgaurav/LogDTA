@@ -40,13 +40,13 @@ const redirectUrl = (req, res) => {
             }
           }, {upsert: true}).exec()
             .then(employee => {
-
+              res.sendFile("/home/sourabh/LogDTA/client/client.html");
             })
             .catch(error => {
               res.send(error);
             });
 
-          res.sendFile("/home/sourabh/LogDTA/client/client.html")
+
 
       }
     })
