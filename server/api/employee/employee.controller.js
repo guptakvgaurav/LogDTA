@@ -1,17 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/users              ->  index
- * POST    /api/users              ->  create
- * GET     /api/users/:id          ->  show
- * PUT     /api/users/:id          ->  upsert
- * PATCH   /api/users/:id          ->  patch
- * DELETE  /api/users/:id          ->  destroy
+ * GET     /api/employees              ->  index
+ * POST    /api/employees              ->  create
+ * GET     /api/employees/:id          ->  show
+ * PUT     /api/employees/:id          ->  upsert
+ * PATCH   /api/employees/:id          ->  patch
+ * DELETE  /api/employees/:id          ->  destroy
  */
 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import User from './user.model';
+import Employee from './employee.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -71,27 +71,27 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
-// Gets a single User from the DB
+// Gets a single Employee from the DB
 export function show(req, res) {
-  return User.findById(req.params.id).exec()
+  return Employee.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Creates a new User in the DB
+// Creates a new Employee in the DB
 export function create(req, res) {
-  return User.create(req.body)
+  return Employee.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
-// Upserts the given User in the DB at the specified ID
+// Upserts the given Employee in the DB at the specified ID
 export function upsert(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return User.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
+  return Employee.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
 
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -102,16 +102,16 @@ export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return User.findById(req.params.id).exec()
+  return Employee.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(patchUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Deletes a User from the DB
+// Deletes a Employee from the DB
 export function destroy(req, res) {
-  return User.findById(req.params.id).exec()
+  return Employee.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

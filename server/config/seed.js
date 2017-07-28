@@ -4,20 +4,20 @@
  */
 
 'use strict';
-import User from '../api/user/user.model';
+import Employee from '../api/employee/employee.model';
 import config from './environment/';
 import logger from '../components/logger';
 
-const dummyUsers = [];
+const dummyEmployees = [];
 
 export default function seedDatabaseIfNeeded() {
   if(config.seedDB) {
-    User.find({}).remove()
+    Employee.find({}).remove()
       .then(() => {
-        let user = User.create(dummyUsers);
-        return user;
+        let employee = Employee.create(dummyEmployees);
+        return employee;
       })
-      .then(() => logger.verbose('finished populating users'))
-      .catch(err => logger.warn('error populating users', err));
+      .then(() => logger.verbose('finished populating employees'))
+      .catch(err => logger.warn('error populating employees', err));
   }
 }

@@ -5,11 +5,11 @@ import path from 'path';
 import _ from 'lodash';
 
 /*function requiredProcessEnv(name) {
-  if(!process.env[name]) {
-    throw new Error('You must set the ' + name + ' environment variable');
-  }
-  return process.env[name];
-}*/
+ if(!process.env[name]) {
+ throw new Error('You must set the ' + name + ' environment variable');
+ }
+ return process.env[name];
+ }*/
 
 // All configurations will extend these options
 // ============================================
@@ -24,6 +24,19 @@ var all = {
 
   // Server port
   port: process.env.PORT || 9000,
+
+  //Cookie maxAge
+
+  cookie: {
+    MaximumAge: process.env.MAX_AGE || 900000,
+  },
+
+  //Token expiry Time
+
+  token: {
+    ExpireTime: process.env.EXPIRES_IN || 900000,
+    SecretKey: process.env.SECRET_KEY || 'NothingIsImpossible',
+  },
 
   // Server IP
   ip: process.env.IP || '0.0.0.0',
